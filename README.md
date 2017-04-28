@@ -13,49 +13,53 @@ Helps to create PHPExcel documents.
 <tbody>
 <tr>
 <td>
-    <pre lang="php">
-        $sheet = new \PHPExcel_Worksheet(null, 'New xls list');
 
-        $sheet->fromArray([
-            ['ID', 'Name', 'Numeric text field', 'Link'],
-            [1, 'First', '1234', 'http://domain.com'],
-            [2, 'Second', '555', 'https://example.com']
-        ]);
+```php
+$sheet = new \PHPExcel_Worksheet(null, 'New xls list');
 
-        $sheet->getColumnDimension('D')->setWidth(70);
+$sheet->fromArray([
+    ['ID', 'Name', 'Numeric text field', 'Link'],
+    [1, 'First', '1234', 'http://domain.com'],
+    [2, 'Second', '555', 'https://example.com']
+]);
 
-        for ($i=2; $i<4; $i++) {
-            $cell = $sheet->getCellByColumnAndRow(3, $i);
+$sheet->getColumnDimension('D')->setWidth(70);
 
-            $cell->getHyperlink()->setUrl($cell->getValue());
-        }
+for ($i=2; $i<4; $i++) {
+    $cell = $sheet->getCellByColumnAndRow(3, $i);
 
-        $excel = new \PHPExcel();
+    $cell->getHyperlink()->setUrl($cell->getValue());
+}
 
-        $excel->removeSheetByIndex(0);
-        $excel->addSheet($sheet);
+$excel = new \PHPExcel();
 
-        $writer = new \PHPExcel_Writer_Excel2007($excel);
+$excel->removeSheetByIndex(0);
+$excel->addSheet($sheet);
 
-        $writer->save('document.xlsx');
-    </pre>
+$writer = new \PHPExcel_Writer_Excel2007($excel);
+
+$writer->save('document.xlsx');
+```
+
 </td>
 <td>
-    <pre lang="php">
-        $sheet = ExcelFacade\SheetBuilder::create('New xls list')
-            ->setHeader(['ID', 'Name', 'Numeric text field', 'Link'])
-            ->setData([
-                [1, 'First', '1234', 'http://domain.com'],
-                [2, 'Second', '555', 'https://example.com']
-            ])
-            ->setColumnWidth('D', 70)
-            ->setUrlColumn(3)
-            ->setColumnType(2, \PHPExcel_Cell_DataType::TYPE_STRING2);
 
-        ExcelFacade\ExcelBuilder::create()
-            ->addSheet($sheet)
-            ->save('document.xlsx');
-    </pre>
+```php
+$sheet = ExcelFacade\SheetBuilder::create('New xls list')
+    ->setHeader(['ID', 'Name', 'Numeric text field', 'Link'])
+    ->setData([
+        [1, 'First', '1234', 'http://domain.com'],
+        [2, 'Second', '555', 'https://example.com']
+    ])
+    ->setColumnWidth('D', 70)
+    ->setUrlColumn(3)
+    ->setColumnType(2, \PHPExcel_Cell_DataType::TYPE_STRING2);
+
+ExcelFacade\ExcelBuilder::create()
+    ->addSheet($sheet)
+    ->save('document.xlsx');
+```
+
 </td>
 </tr>
 </tbody>
