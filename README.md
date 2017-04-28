@@ -39,7 +39,7 @@ Helps to create PHPExcel documents.
 
         $writer->save('document.xlsx');
     </pre>
-<td>
+</td>
 <td>
     <pre lang="php">
         $sheet = ExcelFacade\SheetBuilder::create('New xls list')
@@ -56,7 +56,7 @@ Helps to create PHPExcel documents.
             ->addSheet($sheet)
             ->save('document.xlsx');
     </pre>
-<td>
+</td>
 </tr>
 </tbody>
 </table>
