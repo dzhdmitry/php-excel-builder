@@ -15,20 +15,23 @@ Helps to create PHPExcel documents.
 <td>
 
 ```php
-$sheet = new \PHPExcel_Worksheet(null, 'New xls list');
+$sheet = new \PHPExcel_Worksheet(null, 'New list');
 
 $sheet->fromArray([
-    ['ID', 'Name', 'Numeric text field', 'Link'],
-    [1, 'First', '1234', 'http://domain.com'],
-    [2, 'Second', '555', 'https://example.com']
+    ['ID', 'Name', 'Text field', 'Link'],
+    [1, 'First', '12', 'http://domain.com'],
+    [2, 'Second', '55', 'https://example.com']
 ]);
 
 $sheet->getColumnDimension('D')->setWidth(70);
 
 for ($i=2; $i<4; $i++) {
-    $cell = $sheet->getCellByColumnAndRow(3, $i);
+    $cell = $sheet
+        ->getCellByColumnAndRow(3, $i);
 
-    $cell->getHyperlink()->setUrl($cell->getValue());
+    $cell
+        ->getHyperlink()
+        ->setUrl($cell->getValue());
 }
 
 $excel = new \PHPExcel();
@@ -45,17 +48,20 @@ $writer->save('document.xlsx');
 <td>
 
 ```php
-$sheet = ExcelFacade\SheetBuilder::create('New xls list')
-    ->setHeader(['ID', 'Name', 'Numeric text field', 'Link'])
+$sheet = SheetBuilder::create('New list')
+    ->setHeader(['ID', 'Name', 'Text field', 'Link'])
     ->setData([
-        [1, 'First', '1234', 'http://domain.com'],
-        [2, 'Second', '555', 'https://example.com']
+        [1, 'First', '12', 'http://domain.com'],
+        [2, 'Second', '55', 'https://example.com']
     ])
     ->setColumnWidth('D', 70)
     ->setUrlColumn(3)
-    ->setColumnType(2, \PHPExcel_Cell_DataType::TYPE_STRING2);
+    ->setColumnType(
+        2,
+        \PHPExcel_Cell_DataType::TYPE_STRING2
+    );
 
-ExcelFacade\ExcelBuilder::create()
+ExcelBuilder::create()
     ->addSheet($sheet)
     ->save('document.xlsx');
 ```
