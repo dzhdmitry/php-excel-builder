@@ -109,7 +109,7 @@ class SheetBuilder
      * @param array $columnTypes
      * @return SheetBuilder
      */
-    public function setColumnTypes($columnTypes = [])
+    public function setColumnsTypes($columnTypes = [])
     {
         $this->columnTypes = $columnTypes;
 
