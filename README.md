@@ -1,7 +1,7 @@
 # php-excel-builder
 
-Wrapper for PHPExcel library.
-Helps to create PHPExcel documents.
+Wrapper for [PHPExcel](https://github.com/PHPOffice/PHPExcel) library.
+Helps to create simple PHPExcel documents easier.
 
 # How to use
 
@@ -15,16 +15,20 @@ Helps to create PHPExcel documents.
 <td>
 
 ```php
+// Initializing new sheet
 $sheet = new \PHPExcel_Worksheet(null, 'New list');
 
+// Set sheet content
 $sheet->fromArray([
     ['ID', 'Name', 'Text field', 'Link'],
     [1, 'First', '12', 'http://domain.com'],
     [2, 'Second', '55', 'https://example.com']
 ]);
 
+// Set width to a column
 $sheet->getColumnDimension('D')->setWidth(70);
 
+// Convert columns to hyperlinks
 for ($i=2; $i<4; $i++) {
     $cell = $sheet
         ->getCellByColumnAndRow(3, $i);
@@ -34,11 +38,13 @@ for ($i=2; $i<4; $i++) {
         ->setUrl($cell->getValue());
 }
 
+// Initializing excel document
 $excel = new \PHPExcel();
 
 $excel->removeSheetByIndex(0);
 $excel->addSheet($sheet);
 
+// Saving excel document
 $writer = new \PHPExcel_Writer_Excel2007($excel);
 
 $writer->save('document.xlsx');
@@ -48,22 +54,40 @@ $writer->save('document.xlsx');
 <td>
 
 ```php
+// Initializing new sheet
 $sheet = SheetBuilder::create('New list')
+
+    // Set sheet content
     ->setHeader(['ID', 'Name', 'Text field', 'Link'])
     ->setData([
         [1, 'First', '12', 'http://domain.com'],
         [2, 'Second', '55', 'https://example.com']
     ])
-    ->setColumnWidth('D', 70)
-    ->setUrlColumn(3)
-    ->setColumnType(
-        2,
-        \PHPExcel_Cell_DataType::TYPE_STRING2
-    );
 
+    // Set width to a column
+    ->setColumnWidth('D', 70)
+
+    // Define columns to be converted to hyperlinks
+    ->setUrlColumn(3);
+
+
+
+
+
+
+
+
+// Initializing excel document
 ExcelBuilder::create()
     ->addSheet($sheet)
+
+
+
+    // ...and saving it
     ->save('document.xlsx');
+
+
+
 ```
 
 </td>
@@ -81,62 +105,63 @@ and ExcelBuilder - constructs `\PHPExcel` object and contain collection of Sheet
 
 ### .getSheet()
 
-Return wrapped `\PHPExcel_Worksheet` object
+Return wrapped `\PHPExcel_Worksheet` object.
 
 ### .setHeader($header = [])
 
 Define first line of sheet.
 Header will not be toched by methods such as `setUrlColumns()`.
-Sheet can have no header
+Sheet has no header by default.
 
 ### .setData($data = [])
 
-Define actual rows and columns of sheet
+Define actual rows and columns of sheet.
 
 ### .setUrlColumns($urlColumns = [])
 
-Provide indexes of columns to define which columns will be converted as hyperlink
+Provide indexes of columns to define which columns will be converted as hyperlink.
 
 ### .setUrlColumn($urlColumn)
 
-Same as `setUrlColumns()` but for single column
+Same as `setUrlColumns()` but for single column.
 
 ### .setColumnTypes($columnTypes = [])
 
-Provide indexes of columns columns to define which of `PHPExcel_Cell_DataType::TYPE_*` data-type will be used by each column
+Provide indexes of columns columns to define which of `PHPExcel_Cell_DataType::TYPE_*` data-type will be used by each column.
 
 ### .setColumnType($column, $type)
 
-Same as `setColumnTypes()` but for single column
+Same as `setColumnTypes()` but for single column.
 
 ### .setColumnWidth($column, $width)
 
-Wrapper for `\PHPExcel_Worksheet_ColumnDimension::setWidth()`. Set width of column by index
+Wrapper for `\PHPExcel_Worksheet_ColumnDimension::setWidth()`. Set width of column by index.
 
 ### .setColumnWidths($widths = [])
 
-Same as `setColumnWidth()` but for many columns
+Same as `setColumnWidth()` but for many columns.
 
 ## ExcelBuilder
 
 ### .getExcel()
 
-Return wrapped `\PHPExcel` object
+Return wrapped `\PHPExcel` object.
 
 ### .setWriterType($type)
 
 Select class of writer will be used to save the document.
-Only `\PHPExcel_Writer_Abstract` subclasses are allowed.
-`\PHPExcel_Writer_Excel2007` is used by default
+Any of `\PHPExcel_Writer_Abstract` subclasses can be used.
+Default writer is `\PHPExcel_Writer_Excel2007`.
 
 ### .setSheets($sheets)
 
 Set collection of `SheetBuilder` objects to current builder.
+Before builder is saved, it builds all previously added sheets and composes them into document.
 
 ### .addSheet(SheetBuilder $sheet, $index = null)
 
-Add sheet to collection at provided index
+Add sheet to collection at provided index.
 
 ### .save($filename)
 
-Build and save the document as provided filename
+Build and save the document as provided filename.
