@@ -1,0 +1,14 @@
+{
+    "name": "dzhdmitry/excel-facade",
+    "license": "proprietary",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "ExcelFacade\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.5.9",
+        "phpoffice/phpexcel": "^1.8"
+    }
+}
