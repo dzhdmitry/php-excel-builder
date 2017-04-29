@@ -200,4 +200,4 @@ ExcelBuilder::create()
 
 # Licence
 
-Licensed under the [MIT license](https://github.com/dzhdmitry/php-excel-builder/blob/master/LICENSE.txt).
+Licensed under the [MIT license](https://github.com/dzhdmitry/php-excel-builder/blob/master/LICENSE).
