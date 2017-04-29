@@ -197,3 +197,7 @@ ExcelBuilder::create()
     ->addSheet($sheet)
     ->save(__DIR__ . '/../document.xlsx');
 ```
+
+# Licence
+
+Licensed under the [MIT license](https://github.com/dzhdmitry/php-excel-builder/blob/master/LICENSE.txt).
