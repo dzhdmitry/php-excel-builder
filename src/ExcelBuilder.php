@@ -105,6 +105,7 @@ class ExcelBuilder
 
     /**
      * @return ExcelBuilder
+     * @throws \PHPExcel_Exception
      */
     public function build()
     {
@@ -125,7 +126,7 @@ class ExcelBuilder
 
     /**
      * @param string $filename
-     * @throws \PHPExcel_Writer_Exception
+     * @throws \PHPExcel_Exception
      */
     public function save($filename)
     {

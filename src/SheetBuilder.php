@@ -142,7 +142,6 @@ class SheetBuilder
 
     /**
      * @param array $widths
-     * @throws \PHPExcel_Exception
      * @return SheetBuilder
      */
     public function setColumnsWidths($widths = [])
@@ -156,6 +155,7 @@ class SheetBuilder
 
     /**
      * @return SheetBuilder
+     * @throws \PHPExcel_Exception
      */
     public function build()
     {
@@ -165,6 +165,9 @@ class SheetBuilder
         return $this;
     }
 
+    /**
+     * @throws \PHPExcel_Exception
+     */
     private function handleData()
     {
         $data = $this->data;

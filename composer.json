@@ -1,6 +1,6 @@
 {
     "name": "dzhdmitry/php-excel-builder",
-    "description": "dzhdmitry/excel-facade",
+    "description": "dzhdmitry/excel-builder",
     "homepage": "https://github.com/dzhdmitry/php-excel-builder",
     "license": "MIT",
     "type": "library",
